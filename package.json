@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "<h1>Fashion eCommerce Shop in React.js, TypeScript and JSON server</h1>",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -12,5 +12,15 @@
     "cors": "^2.8.5",
     "express": "^5.2.1"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annilla2/Projekti-WebAPI.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/annilla2/Projekti-WebAPI/issues"
+  },
+  "homepage": "https://github.com/annilla2/Projekti-WebAPI#readme"
 }
