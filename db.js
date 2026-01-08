@@ -2,17 +2,14 @@ import mysql from "mysql2";
 
 const db = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "", // zakonisht bosh në XAMPP
-  database: "fashion_shop", // EMRI I PERBASHKET
+  user: "root",           // vendos user e databazës tënde
+  password: "",           // vendos password të MySQL
+  database: "fashion_shop" // emri i databazës që krijove
 });
 
 db.connect((err) => {
-  if (err) {
-    console.error("Database connection failed:", err);
-  } else {
-    console.log("Connected to MySQL database ✅");
-  }
+  if (err) console.log("Database connection failed:", err);
+  else console.log("Connected to MySQL database ✅");
 });
 
 export default db;
