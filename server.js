@@ -1,16 +1,14 @@
+// backend/server.js
 import express from "express";
 import cors from "cors";
-import productsRoute from "./routes/product.js"; // shiko path i saktë
+import productRoute from "./routes/product.js"; // pa "s", përputhet me file-in
 
 const app = express();
-const PORT = 5000;
-
 app.use(cors());
 app.use(express.json());
 
-// route për produktet
-app.use("/products", productsRoute);
+// API endpoint për produktet
+app.use("/products", productRoute); // URL mbetet /products, nuk ndryshon
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
