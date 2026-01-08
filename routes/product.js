@@ -1,59 +1,29 @@
-// backend/routes/products.js
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const db = require("../db");
 
 // GET all products
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM products", (err, results) => {
-    if (err) return res.status(500).json(err);
-    res.json(results);
-  });
+  res.send("GET all products");
 });
 
-// GET single product by ID
+// GET single product
 router.get("/:id", (req, res) => {
-  const { id } = req.params;
-  db.query("SELECT * FROM products WHERE id = ?", [id], (err, result) => {
-    if (err) return res.status(500).json(err);
-    res.json(result[0]);
-  });
+  res.send(`GET product ${req.params.id}`);
 });
 
-// CREATE product
+// POST create product
 router.post("/", (req, res) => {
-  const { title, description, price, image, color, size, stock } = req.body;
-  db.query(
-    "INSERT INTO products (title, description, price, image, color, size, stock) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [title, description, price, image, color, size, stock],
-    (err, result) => {
-      if (err) return res.status(500).json(err);
-      res.status(201).json({ message: "Product created", productId: result.insertId });
-    }
-  );
+  res.send("POST create product");
 });
 
-// UPDATE product
+// PUT update product
 router.put("/:id", (req, res) => {
-  const { id } = req.params;
-  const { title, description, price, image, color, size, stock } = req.body;
-  db.query(
-    "UPDATE products SET title=?, description=?, price=?, image=?, color=?, size=?, stock=? WHERE id=?",
-    [title, description, price, image, color, size, stock, id],
-    (err, result) => {
-      if (err) return res.status(500).json(err);
-      res.json({ message: "Product updated" });
-    }
-  );
+  res.send(`PUT update product ${req.params.id}`);
 });
 
 // DELETE product
 router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  db.query("DELETE FROM products WHERE id=?", [id], (err, result) => {
-    if (err) return res.status(500).json(err);
-    res.json({ message: "Product deleted" });
-  });
+  res.send(`DELETE product ${req.params.id}`);
 });
 
-module.exports = router;
+export default router;
