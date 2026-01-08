@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import productsRoute from "./routes/products.js"; // shiko path i saktë
+import productsRoute from "./routes/product.js"; // shiko path i saktë
 
 const app = express();
 const PORT = 5000;
