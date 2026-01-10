@@ -1,9 +1,10 @@
 import express from "express";
 import cors from "cors";
 import productRoute from "./routes/product.js";
-import { swaggerUi, specs } from "./swagger.js"; // import i saktë
+import { swaggerUi, specs } from "./swagger.js"; // importi i saktë
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
@@ -15,6 +16,6 @@ console.log("Swagger UI should be available at http://localhost:5000/api-docs");
 app.use("/products", productRoute);
 
 const PORT = 5000;
-app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
