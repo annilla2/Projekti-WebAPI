@@ -1,6 +1,6 @@
+// backend/swagger.js
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import path from "path";
 
 const options = {
   definition: {
@@ -16,11 +16,9 @@ const options = {
       },
     ],
   },
-  // përdorim rrugën absolute tek product.js
-  apis: [path.join(process.cwd(), "backend/routes/product.js")],
+  apis: ["./routes/product.js"], // 🔴 kjo është KYÇI
 };
 
 const specs = swaggerJsdoc(options);
 
-// Eksporto si named exports për t’i përdorur në server.js
 export { swaggerUi, specs };
