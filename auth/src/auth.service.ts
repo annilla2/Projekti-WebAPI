@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import db from "./db";
+import db from "./db.ts";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
