@@ -1,9 +1,19 @@
+// backend/routes/product.js
 import express from "express";
 import db from "../db.js"; // lidhja me MySQL
 
 const router = express.Router();
 
-// GET all products
+/**
+ * @swagger
+ * /products:
+ *   get:
+ *     summary: Get all products
+ *     description: Retrieve a list of all products in the shop.
+ *     responses:
+ *       200:
+ *         description: List of products.
+ */
 router.get("/", (req, res) => {
   db.query("SELECT * FROM products", (err, results) => {
     if (err) return res.status(500).json({ message: err.message });
@@ -11,17 +21,62 @@ router.get("/", (req, res) => {
   });
 });
 
-// GET single product
+/**
+ * @swagger
+ * /products/{id}:
+ *   get:
+ *     summary: Get product by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: Product ID
+ *     responses:
+ *       200:
+ *         description: Product data
+ *       404:
+ *         description: Product not found
+ */
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   db.query("SELECT * FROM products WHERE id = ?", [id], (err, results) => {
     if (err) return res.status(500).json({ message: err.message });
-    if (results.length === 0) return res.status(404).json({ message: "Product not found" });
+    if (results.length === 0)
+      return res.status(404).json({ message: "Product not found" });
     res.json(results[0]);
   });
 });
 
-// POST create product
+/**
+ * @swagger
+ * /products:
+ *   post:
+ *     summary: Create a new product
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               category:
+ *                 type: string
+ *               imageUrl:
+ *                 type: string
+ *               stock:
+ *                 type: integer
+ *     responses:
+ *       201:
+ *         description: Product created
+ */
 router.post("/", (req, res) => {
   const { name, description, price, category, imageUrl, stock } = req.body;
   db.query(
@@ -34,7 +89,43 @@ router.post("/", (req, res) => {
   );
 });
 
-// PUT update product
+/**
+ * @swagger
+ * /products/{id}:
+ *   put:
+ *     summary: Update an existing product
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: Product ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               category:
+ *                 type: string
+ *               imageUrl:
+ *                 type: string
+ *               stock:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Product updated
+ *       404:
+ *         description: Product not found
+ */
 router.put("/:id", (req, res) => {
   const { id } = req.params;
   const { name, description, price, category, imageUrl, stock } = req.body;
@@ -48,7 +139,24 @@ router.put("/:id", (req, res) => {
   );
 });
 
-// DELETE product
+/**
+ * @swagger
+ * /products/{id}:
+ *   delete:
+ *     summary: Delete a product
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: Product ID
+ *     responses:
+ *       200:
+ *         description: Product deleted
+ *       404:
+ *         description: Product not found
+ */
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   db.query("DELETE FROM products WHERE id=?", [id], (err) => {

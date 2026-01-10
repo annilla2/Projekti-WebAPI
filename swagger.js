@@ -11,11 +11,11 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000", // ndrysho nëse serverin e ke në port tjetër
+        url: "http://localhost:5000",
       },
     ],
   },
-  apis: ["./routes/product.js"], // ku ke route-et e produkteve
+  apis: ["./routes/product.js"], // shiko që rruga të jetë e saktë
 };
 
 const specs = swaggerJsdoc(options);
