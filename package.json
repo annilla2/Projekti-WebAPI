@@ -7,12 +7,36 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "mysql2": "^3.6.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.22.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.16.0",
     "nest-winston": "^1.10.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "winston": "^3.19.0"
+  },
+  "description": "<h1>Fashion eCommerce Shop in React.js, TypeScript and JSON server</h1>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annilla2/Projekti-WebAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annilla2/Projekti-WebAPI/issues"
+  },
+  "homepage": "https://github.com/annilla2/Projekti-WebAPI#readme",
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.0.5",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
