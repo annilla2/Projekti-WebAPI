@@ -1,13 +1,12 @@
-const express = require("express");
-const db = require("./db");
+// backend/routes/users.js
+import express from "express";
+import db from "../db.js"; // sigurohu që db.js është gjithashtu me ES Module
 
-const app = express();
-app.use(express.json());
+const router = express.Router();
 
-
-app.post("/users", (req, res) => {
+// POST create user
+router.post("/", (req, res) => {
   const { name, email, age } = req.body;
-
   const sql = "INSERT INTO users (name, email, age) VALUES (?, ?, ?)";
   db.query(sql, [name, email, age], (err, result) => {
     if (err) return res.status(500).json(err);
@@ -15,51 +14,39 @@ app.post("/users", (req, res) => {
   });
 });
 
-
-app.get("/users", (req, res) => {
+// GET all users
+router.get("/", (req, res) => {
   db.query("SELECT * FROM users", (err, result) => {
     if (err) return res.status(500).json(err);
     res.json(result);
   });
 });
 
-
-app.get("/users/:id", (req, res) => {
-  db.query(
-    "SELECT * FROM users WHERE id = ?",
-    [req.params.id],
-    (err, result) => {
-      if (err) return res.status(500).json(err);
-      res.json(result[0]);
-    }
-  );
+// GET single user
+router.get("/:id", (req, res) => {
+  db.query("SELECT * FROM users WHERE id = ?", [req.params.id], (err, result) => {
+    if (err) return res.status(500).json(err);
+    res.json(result[0]);
+  });
 });
 
-
-app.put("/users/:id", (req, res) => {
+// PUT update user
+router.put("/:id", (req, res) => {
   const { name, email, age } = req.body;
-
-  const sql =
-    "UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?";
-  db.query(sql, [name, email, age, req.params.id], err => {
+  const sql = "UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?";
+  db.query(sql, [name, email, age, req.params.id], (err) => {
     if (err) return res.status(500).json(err);
     res.json({ message: "User updated" });
   });
 });
 
-
-app.delete("/users/:id", (req, res) => {
-  db.query(
-    "DELETE FROM users WHERE id = ?",
-    [req.params.id],
-    err => {
-      if (err) return res.status(500).json(err);
-      res.json({ message: "User deleted" });
-    }
-  );
+// DELETE user
+router.delete("/:id", (req, res) => {
+  db.query("DELETE FROM users WHERE id = ?", [req.params.id], (err) => {
+    if (err) return res.status(500).json(err);
+    res.json({ message: "User deleted" });
+  });
 });
 
-
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
-});
+// Kjo është e fundit
+export default router;
